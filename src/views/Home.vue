@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Dashboard</h1>
+    
+    <div v-if="user">
+      <h3>{{ user.name }}</h3>
+      <h4>{{ user.email }}</h4>
+    </div>
+
+    <button @click.prevent="handleLogout">Logout</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  name: 'Dashboard',
+  data(){
+    return{
+
+    }
+  },
+  computed:{
+    ...mapState('auth', ['user'])
+  },
+  methods:{
+    ...mapActions('auth', ['logout']),
+    handleLogout(){
+      this.logout()
+    }
   }
 }
 </script>
