@@ -16,6 +16,9 @@
         Korisnik trenutačno nije logiran!
       </p>
     </div>
+    <div v-if="$can('dashboard_access')">
+      <p>Vue CASL test!</p>
+    </div>
   </div>
 </template>
 
