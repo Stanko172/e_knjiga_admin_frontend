@@ -8,6 +8,7 @@
         <h4>{{ user.email }}</h4>
       </div>
 
+      <button @click.prevent="testEmit">Emit EventHub event</button>
       <button @click.prevent="handleLogout">Logout</button>
     </div>
     <div v-else>
@@ -34,6 +35,9 @@ export default {
     ...mapActions('auth', ['logout', 'checkLoginStatus']),
     handleLogout(){
       this.logout()
+    },
+    testEmit(){
+      this.$eventHub.$emit('test', 'Hello from Home.vue');
     }
   },
   mounted(){

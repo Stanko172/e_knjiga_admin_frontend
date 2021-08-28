@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+
+    <EventHub />
+    
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
@@ -8,6 +11,17 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import EventHub from './components/event_hub/EventHub.vue'
+
+export default{
+  components:{
+    EventHub
+  }
+}
+</script>
+
 
 <style>
 #app {
