@@ -1,12 +1,20 @@
 <template>
-  <div>
-    e-mail
-    <input type="text" v-model="form.email"> <br>
-    password
-    <input type="text" v-model="form.password"> <br>
+    <div>
+        <v-container>
+            <v-text-field
+            v-model="form.email"
+            label="E-mail"
+            required
+            ></v-text-field>
+            <v-text-field
+            v-model="form.password"
+            label="Lozinka"
+            required
+            ></v-text-field>
 
-    <button @click.prevent="handleLogin">Login</button>
-  </div>
+            <v-btn @click.prevent="handleLogin" color="primary">Login</v-btn>
+        </v-container>
+     </div>
 </template>
 
 <script>
