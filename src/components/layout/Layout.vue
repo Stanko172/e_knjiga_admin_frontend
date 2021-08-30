@@ -14,7 +14,7 @@
                     <v-row align="stretch" class="fill-height">
                         <v-col class="d-flex justify-center align-end">
                             <div class="hero-text">
-                                John Doe - Administrator
+                                {{ user.name }} - {{ roles.join(', ') }}
                             </div>
                         </v-col>
                     </v-row>
@@ -68,10 +68,21 @@
             </v-list>
         </v-navigation-drawer>
 
+        <!--AppBar-->
         <v-app-bar app dark color="primary">
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>E-knjiga</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-btn
+              icon
+              color="white"
+              @click="handleLogout"
+            >
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
         </v-app-bar>
 
         <v-main class="base-style">
@@ -81,6 +92,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
     data(){
         return{
@@ -99,6 +111,15 @@ export default {
                 { title: 'Autori', icon: 'mdi-account-circle', link: "/autori" },
                 { title: 'Žanrovi', icon: 'mdi-shape', link: "/zanrovi" },
             ],
+        }
+    },
+    computed: {
+        ...mapState('auth', ['user', 'roles'])
+    },
+    methods:{
+        ...mapActions('auth', ['logout']),
+        handleLogout(){
+            this.logout()
         }
     }
 }

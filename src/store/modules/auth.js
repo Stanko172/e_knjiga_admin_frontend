@@ -4,7 +4,8 @@ import router from "../../router";
 
 // State object
 const state = {
-    user: null,
+    user: '',
+    roles: [],
     registerErrors: null,
     loginErrors: null,
     isLoggedIn: false
@@ -56,6 +57,9 @@ const actions = {
     checkLoginStatus({ commit }){
         const status = localStorage.getItem('auth')
         commit('SET_LOGIN_STATUS', status)
+    },
+    updateUserRoles({ commit }, roles){
+        commit('UPDATE_USER_ROLES', roles)
     }
 
 }
@@ -63,6 +67,7 @@ const actions = {
 // Mutations
 const mutations = {
     SET_USER: (state, user) => state.user = user,
+    UPDATE_USER_ROLES: (state, roles) => state.roles = roles,
     UPDATE_REGISTER_ERRORS: (state, errors) => state.registerErrors = errors.response.data.errors,
     UPDATE_LOGIN_ERRORS: (state, errors) => state.loginErrors = errors.response.data.errors,
     SET_LOGIN_STATUS: (state, status) => state.isLoggedIn = status
