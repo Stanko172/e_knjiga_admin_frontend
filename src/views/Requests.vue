@@ -130,7 +130,7 @@ import {mapState, mapActions} from 'vuex'
         { text: 'Ime', value: 'name' },
         { text: 'Prezime', value: 'surname' },
         { text: 'E-mail', value: 'email' },
-        { text: 'Poslovnica', value: 'shop_office_id' },
+        { text: 'Poslovnica', value: 'shop_office.name' },
         { text: 'Akcije', value: 'actions' },
       ],
       message: '',
@@ -141,12 +141,14 @@ import {mapState, mapActions} from 'vuex'
         surname: '',
         email: '',
         shop_office_id: 1,
+        shop_office: {}
       },
       defaultItem: {
         name: '',
         surname: '',
         email: '',
         shop_office_id: 1,
+        shop_office: {}
       },
       breadcrumbs: [
         {
