@@ -1,4 +1,6 @@
-# e_knjiga_frontend
+# e_knjiga_frontend 
+
+![alt text](https://i.ibb.co/s63sM6M/admin-dashboard.png)
 
 ## Project setup
 ```
