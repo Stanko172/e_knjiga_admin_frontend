@@ -27,7 +27,7 @@
             >
             <div v-for="route in routes" :key="route.title">
             <v-list-item
-                v-if="!route.hasOwnProperty('subRoutes')"
+                v-if="!route.hasOwnProperty('subRoutes') && $can(route.gate)"
                 link
                 :to="route.link"
             >
@@ -42,7 +42,7 @@
             </v-list-item>
             
             <v-list-group
-            v-else
+            v-else-if="$can(route.gate)"
             :value="false"
             :prepend-icon="route.icon"
             >
@@ -86,7 +86,7 @@
         </v-app-bar>
 
         <v-main class="base-style">
-            <router-view></router-view>
+            <router-view v-if="$can('dashboard_access')"></router-view>
         </v-main>
     </div>
 </template>
@@ -98,18 +98,18 @@ export default {
         return{
             drawer: null,
             routes: [
-                { title: 'Naslovnica', icon: 'mdi-view-dashboard', link: "/" },
-                { title: 'Upravljanje korisnicima', icon: 'mdi-account', link: "/korisnici", subRoutes: [
-                    { title: 'Permisije', icon: 'mdi-security', link: "/permisije" },
-                    { title: 'Role', icon: 'mdi-shield-account-outline', link: "/role" },
-                    { title: 'Korisnici', icon: 'mdi-account-supervisor', link: "/korisnici" }
+                { title: 'Naslovnica', icon: 'mdi-view-dashboard', link: "/", gate: 'dashboard_access' },
+                { title: 'Upravljanje korisnicima', icon: 'mdi-account', link: "/korisnici", gate: 'users_management_access', subRoutes: [
+                    { title: 'Permisije', icon: 'mdi-security', link: "/permisije", gate: 'users_management _access' },
+                    { title: 'Role', icon: 'mdi-shield-account-outline', link: "/role", gate: 'users_management _access' },
+                    { title: 'Korisnici', icon: 'mdi-account-supervisor', link: "/korisnici", gate: 'users_management _access' }
                 ] },
-                { title: 'Zahtjevi', icon: 'mdi-checkbox-multiple-marked', link: "/zahtjevi" },
-                { title: 'Knjige', icon: 'mdi-book', link: "/knjige" },
-                { title: 'E-knjige', icon: 'mdi-notebook', link: "/eknjige" },
-                { title: 'Promocije', icon: 'mdi-currency-usd-off', link: "/promocije" },
-                { title: 'Autori', icon: 'mdi-account-circle', link: "/autori" },
-                { title: 'Žanrovi', icon: 'mdi-shape', link: "/zanrovi" },
+                { title: 'Zahtjevi', icon: 'mdi-checkbox-multiple-marked', link: "/zahtjevi", gate: 'requests_access' },
+                { title: 'Knjige', icon: 'mdi-book', link: "/knjige", gate: 'books_access' },
+                { title: 'E-knjige', icon: 'mdi-notebook', link: "/eknjige", gate: 'ebooks_access' },
+                { title: 'Promocije', icon: 'mdi-currency-usd-off', link: "/promocije", gate: 'promotions_access' },
+                { title: 'Autori', icon: 'mdi-account-circle', link: "/autori", gate: 'authors_access' },
+                { title: 'Žanrovi', icon: 'mdi-shape', link: "/zanrovi", gate: 'genres_access' },
             ],
         }
     },
