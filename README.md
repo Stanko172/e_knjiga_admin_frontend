@@ -2,6 +2,8 @@
 
 ![alt text](https://i.ibb.co/s63sM6M/admin-dashboard.png)
 
+![alt text](https://i.ibb.co/dgXBHyL/admin-korisnici.png)
+
 ## Project setup
 ```
 npm install
