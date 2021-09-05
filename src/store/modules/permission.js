@@ -28,6 +28,10 @@ const actions = {
             console.log(response)
             dispatch('getAllPermissions', null)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Permisija uspješno spremljena!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     deletePermission({ commit, dispatch }, payload){
@@ -37,6 +41,10 @@ const actions = {
             console.log(response)
             dispatch('getAllPermissions', null)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Permisija uspješno izbrisana!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     }
 }

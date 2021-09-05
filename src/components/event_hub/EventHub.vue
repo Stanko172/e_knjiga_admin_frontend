@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+      <vue-snotify></vue-snotify>
+  </div>
 </template>
 
 <script>
@@ -32,19 +34,38 @@ export default {
     },
     methods:{
         ...mapActions('auth', ['getUser', 'updateUserRoles']),
-        test123(payload){
-            console.log("Activated: ", payload)
-        }
+        successNotification(message){
+            this.$snotify.success(message, {
+                timeout: 2000,
+                showProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+                
+        },
+        errorNotification(message){
+            this.$snotify.error(message, {
+                timeout: 2000,
+                showProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+                
+        },
     },
     created(){
-        this.$eventHub.$on('test', (payload) => this.test123(payload))
+        this.$eventHub.$on('success-notification', (message) => this.successNotification(message)),
+        this.$eventHub.$on('error-notification', (message) => this.errorNotification(message))
     },
     beforeDestroy(){
-        this.$eventHub.$off('test')
+        this.$eventHub.$off('success-notification'),
+        this.$eventHub.$off('error-notification')
     }
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -25,6 +25,7 @@ const actions = {
         })
         .catch((error) => {
             commit('UPDATE_REGISTER_ERRORS', error)
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     async login({ commit }, form){
@@ -37,6 +38,7 @@ const actions = {
         })
         .catch((error) => {
             commit('UPDATE_LOGIN_ERRORS', error)
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     async logout(){
@@ -47,11 +49,17 @@ const actions = {
             localStorage.removeItem("auth")
             router.push({name: 'Login'})
         })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
     },
     getUser({ commit }){
         api.get("/user")
         .then((response) => {
             commit('SET_USER', response.data)
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     checkLoginStatus({ commit }){

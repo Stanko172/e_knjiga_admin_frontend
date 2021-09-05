@@ -20,6 +20,9 @@ const actions = {
             commit('SET_USERS', response.data)
             commit('SET_LOADING', false)
         })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
     },
     createUser({ commit }, payload){
         commit('SET_LOADING', true)
@@ -27,6 +30,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Korisnik uspješno kreiran!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     editUser({ commit }, payload){
@@ -35,6 +42,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Korisnik uspješno spremljen!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     deleteUser({ commit }, payload){
@@ -43,6 +54,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Korisnik uspješno izbrisan!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     }
 }

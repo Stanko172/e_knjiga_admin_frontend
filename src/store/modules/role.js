@@ -27,6 +27,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Rola uspješno kreirana!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     editRole({ commit }, payload){
@@ -35,6 +39,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Rola uspješno spremljena!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     },
     deleteRole({ commit }, payload){
@@ -43,6 +51,10 @@ const actions = {
         .then((response) => {
             console.log(response.data)
             commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', 'Rola uspješno izbrisana!');
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
         })
     }
 }
