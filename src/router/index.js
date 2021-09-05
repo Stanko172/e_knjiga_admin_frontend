@@ -24,6 +24,18 @@ const routes = [
     meta: { guestOnly: true }
   },
   {
+    path: '/zaboravljena_lozinka',
+    name: 'ForgotPassword',
+    component: () => import('../views/ForgotPassword.vue'),
+    meta: { guestOnly: true }
+  },
+  {
+    path: '/reset_lozinke/:token',
+    name: 'ResetPassword',
+    component: () => import('../views/ResetPassword.vue'),
+    meta: { guestOnly: true }
+  },
+  {
     path: '/permisije',
     name: 'Permisssions',
     component: () => import('../views/Permissions.vue'),
