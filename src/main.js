@@ -7,6 +7,8 @@ import ability from './services/ability'
 import vuetify from './plugins/vuetify'
 import Snotify from 'vue-snotify'; 
 import 'vue-snotify/styles/material.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 Vue.config.productionTip = false
 
@@ -18,6 +20,9 @@ Vue.use(abilitiesPlugin, ability)
 
 //Notifications UI
 Vue.use(Snotify)
+
+//Loading overlay UI
+Vue.use(VueLoading)
 
 new Vue({
   router,

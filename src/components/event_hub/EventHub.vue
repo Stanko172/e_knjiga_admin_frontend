@@ -10,7 +10,7 @@ import { mapActions } from 'vuex'
 export default {
     data(){
         return{
-
+            loader: null
         }
     },
     watch: {
@@ -54,14 +54,33 @@ export default {
             });
                 
         },
+        loadingOverlayActive(isLoading) {
+            console.log(isLoading)
+            this.loader = this.$loading.show({
+                // Optional parameters
+                color: '#1B4188"',
+                loader: 'dots',
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: true,
+                onCancel: this.onCancel,
+            });
+        },     
+        loadingOverlayInactive(isLoading) {
+            console.log(isLoading)
+            this.loader.hide()
+        },    
     },
     created(){
         this.$eventHub.$on('success-notification', (message) => this.successNotification(message)),
         this.$eventHub.$on('error-notification', (message) => this.errorNotification(message))
+        this.$eventHub.$on('loading-overlay-active', (isLoading) => this.loadingOverlayActive(isLoading)),
+        this.$eventHub.$on('loading-overlay-inactive', (isLoading) => this.loadingOverlayInactive(isLoading))
     },
     beforeDestroy(){
         this.$eventHub.$off('success-notification'),
         this.$eventHub.$off('error-notification')
+        this.$eventHub.$off('loading-overlay-active'),
+        this.$eventHub.$off('loading-overlay-inactive')
     }
 }
 </script>

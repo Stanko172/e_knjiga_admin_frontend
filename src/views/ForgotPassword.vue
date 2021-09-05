@@ -77,17 +77,20 @@ export default {
   },
   methods: {
     async forgotSubmit() {
-    await csrf.getCookie()
-      api
+        this.$eventHub.$emit('loading-overlay-active', true);
+        await csrf.getCookie()
+        api
         .post("/forgot-password", { email: this.email })
         .then((response) => {
-          console.log(response);
-          if (response.data) {
+        console.log(response);
+        if (response.data) {
+            this.$eventHub.$emit('loading-overlay-inactive', true);
             this.snackbar.show = true;
-          }
+        }
         })
         .catch((err) => {
             console.log(err)
+            this.$eventHub.$emit('loading-overlay-inactive', true);
             this.snackbar = {
                 color: "#C62828",
                 show: true,
@@ -96,7 +99,7 @@ export default {
             };
         });
     },
-  },
+},
 };
 </script>
 
