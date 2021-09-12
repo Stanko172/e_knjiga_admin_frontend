@@ -5,6 +5,7 @@ import request from './modules/request'
 import permission from './modules/permission'
 import role from './modules/role'
 import user from './modules/user'
+import book from './modules/book'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     request,
     permission,
     role,
-    user
+    user,
+    book
   }
 })
