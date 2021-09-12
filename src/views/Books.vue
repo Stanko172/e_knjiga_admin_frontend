@@ -265,6 +265,7 @@ import {mapState, mapActions} from 'vuex'
         price: '',
         description: '',
         genres: [],
+        writers: []
       },
 
     }),
