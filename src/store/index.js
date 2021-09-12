@@ -7,6 +7,7 @@ import role from './modules/role'
 import user from './modules/user'
 import book from './modules/book'
 import writer from './modules/writer'
+import genre from './modules/genre'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     role,
     user,
     book,
-    writer
+    writer,
+    genre
   }
 })
