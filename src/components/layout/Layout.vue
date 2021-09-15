@@ -86,7 +86,7 @@
         </v-app-bar>
 
         <v-main class="base-style">
-            <router-view v-if="$can($route.meta.gate)"></router-view>
+            <router-view v-if="$route.meta.gate == undefined || $can($route.meta.gate)"></router-view>
         </v-main>
     </div>
 </template>
