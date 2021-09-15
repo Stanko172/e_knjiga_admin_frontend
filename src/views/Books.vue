@@ -229,7 +229,6 @@ import {mapState, mapActions} from 'vuex'
 import moment from 'moment'
   export default {
     data: () => ({
-      loading: false,
       dialog: false,
       dialogDelete: false,
       breadcrumbs: [
@@ -275,7 +274,7 @@ import moment from 'moment'
     }),
 
     computed: {
-      ...mapState('book', ['books', 'writers', 'genres']),
+      ...mapState('book', ['books', 'writers', 'genres', 'loading']),
       formTitle () {
         return this.editedIndex === -1 ? 'Dodaj knjigu' : 'Uredi knjigu'
       },

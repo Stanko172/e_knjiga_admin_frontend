@@ -5,7 +5,8 @@ const state = {
     books: [],
     writers: [],
     genres: [],
-    errors: []
+    errors: [],
+    loading: false
 }
 
 // Getter functions
@@ -16,9 +17,11 @@ const getters = {
 // Actions 
 const actions = {
     fetchAllBooks({ commit }){
+        commit('SET_LOADING', true)
         api.get('admin/book/index')
         .then((response) =>{
             commit('SET_BOOKS', response.data)
+            commit('SET_LOADING', false)
         })
         .catch((error) => {
             commit('SET_ERRORS', error)
@@ -49,6 +52,7 @@ const actions = {
         api.post(`admin/book/update/${payload.id}`, payload)
         .then(() => {
             dispatch('fetchAllBooks', null)
+            this._vm.$eventHub.$emit('success-notification', 'Knjiga uspješno spremljena');
         })
         .catch((error) => {
             commit('SET_ERRORS', error)
@@ -59,6 +63,7 @@ const actions = {
         api.post('admin/book/create', payload)
         .then(() => {
             dispatch('fetchAllBooks', null)
+            this._vm.$eventHub.$emit('success-notification', 'Knjiga uspješno kreirana');
         })
         .catch((error) => {
             commit('SET_ERRORS', error)
@@ -69,6 +74,7 @@ const actions = {
         api.post(`admin/book/delete/${payload}`)
         .then(() => {
             dispatch('fetchAllBooks', null)
+            this._vm.$eventHub.$emit('success-notification', 'Knjiga uspješno izbrisana');
         })
         .catch((error) => {
             commit('SET_ERRORS', error)
@@ -83,7 +89,8 @@ const mutations = {
     SET_BOOKS: (state, books) => state.books = books,
     SET_WRITERS: (state, writers) => state.writers = writers,
     SET_GENRES: (state, genres) => state.genres = genres,
-    SET_ERRORS: (state, errors) => state.error = errors
+    SET_ERRORS: (state, errors) => state.error = errors,
+    SET_LOADING: (state, loading) => state.loading = loading
 }
 
 export default {
