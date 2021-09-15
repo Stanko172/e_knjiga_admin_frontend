@@ -7,6 +7,9 @@
       sort-by="calories"
       class="elevation-1"
     >
+      <template v-slot:[`item.created_at`]="{ item }">
+        {{  moment(item.created_at).format("YYYY-MM-DD HH:mm:ss")  }}
+      </template>
       <template v-slot:[`item.permissions`]="{ item }">
         <v-chip
           v-for="(permission, index) in item.permissions"
@@ -173,6 +176,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import moment from 'moment'
   export default {
     data: () => ({
       dialog: false,
@@ -230,6 +234,7 @@ import { mapState, mapActions } from 'vuex'
 
     created () {
       this.initialize()
+      this.moment = moment
     },
 
     methods: {

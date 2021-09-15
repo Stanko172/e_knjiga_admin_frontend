@@ -7,6 +7,9 @@
       sort-by="calories"
       class="elevation-1"
     >
+      <template v-slot:[`item.created_at`]="{ item }">
+        {{  moment(item.created_at).format("YYYY-MM-DD HH:mm:ss")  }}
+      </template>
       <template v-slot:top>
         <v-toolbar
           flat
@@ -153,6 +156,7 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
+import moment from 'moment'
   export default {
     data: () => ({
       loading: false,
@@ -213,6 +217,7 @@ import {mapState, mapActions} from 'vuex'
 
     created () {
       this.initialize()
+      this.moment = moment
     },
 
     methods: {
