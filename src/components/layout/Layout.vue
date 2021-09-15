@@ -86,7 +86,7 @@
         </v-app-bar>
 
         <v-main class="base-style">
-            <router-view v-if="$can('dashboard_access')"></router-view>
+            <router-view v-if="$can($route.meta.gate)"></router-view>
         </v-main>
     </div>
 </template>
