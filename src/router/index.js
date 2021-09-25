@@ -89,6 +89,18 @@ const routes = [
     component: () => import('../views/Genres.vue'),
     meta: { authOnly: true, gate: 'genres_access' }
   },
+  {
+    path: '/iznajmljivanja/zahtjevi',
+    name: 'RentalRequests',
+    component: () => import('../views/RentalRequests.vue'),
+    meta: { authOnly: true, gate: 'rental_access' }
+  },
+  {
+    path: '/iznajmljivanja/potvrdeno',
+    name: 'RentalRequestsConfirmed',
+    component: () => import('../views/RentalRequestsConfirmed.vue'),
+    meta: { authOnly: true, gate: 'rental_access' }
+  },
 ]
 
 const router = new VueRouter({

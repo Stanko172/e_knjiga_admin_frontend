@@ -34,7 +34,7 @@ const actions = {
         .then((response) =>{
             localStorage.setItem("auth", "true")
             commit('SET_USER', response.data)
-            router.push({name: 'Home'})
+            router.push({name: 'Dashboard'})
         })
         .catch((error) => {
             commit('UPDATE_LOGIN_ERRORS', error)

@@ -104,8 +104,12 @@ export default {
                     { title: 'Role', icon: 'mdi-shield-account-outline', link: "/role", gate: 'users_management _access' },
                     { title: 'Korisnici', icon: 'mdi-account-supervisor', link: "/korisnici", gate: 'users_management _access' }
                 ] },
-                { title: 'Zahtjevi', icon: 'mdi-checkbox-multiple-marked', link: "/zahtjevi", gate: 'requests_access' },
+                { title: 'Zahtjevi za članstvo', icon: 'mdi-checkbox-multiple-marked', link: "/zahtjevi", gate: 'requests_access' },
                 { title: 'Knjige', icon: 'mdi-book', link: "/knjige", gate: 'books_access' },
+                { title: 'Iznajmljivanja', icon: 'mdi-book-clock', link: "/iznajmljivanja/zahtjevi", gate: 'rental_access', subRoutes: [
+                    { title: 'Zahtjevi', icon: 'mdi-clipboard-clock-outline', link: "/iznajmljivanja/zahtjevi", gate: 'rental_access' },
+                    { title: 'Potvrđeno', icon: 'mdi-check', link: "/iznajmljivanja/potvrdeno", gate: 'rental_access' },
+                ] },
                 { title: 'E-knjige', icon: 'mdi-notebook', link: "/eknjige", gate: 'ebooks_access' },
                 { title: 'Promocije', icon: 'mdi-currency-usd-off', link: "/promocije", gate: 'promotions_access' },
                 { title: 'Autori', icon: 'mdi-account-circle', link: "/autori", gate: 'authors_access' },
