@@ -25,6 +25,17 @@ const actions = {
             this._vm.$eventHub.$emit('error-notification', error);
         })
     },
+    fetchAllRentalRequestsConfirmed({ commit }){
+        commit('SET_LOADING', true)
+        api.get("/admin/rental/index")
+        .then((response) => {
+            commit('SET_DATA', response.data)
+            commit('SET_LOADING', false)
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
+    },
     acceptRentalRequest({ commit, dispatch }, payload){
         commit('SET_LOADING', true)
         api.post("/admin/rental_request/create", payload)
@@ -48,7 +59,32 @@ const actions = {
         .catch((error) => {
             this._vm.$eventHub.$emit('error-notification', error);
         })
-    }
+    },
+    pickedUp({ commit, dispatch }, payload){
+        commit('SET_LOADING', true)
+        api.patch(`/admin/rental/picked_up/${payload}`)
+        .then((response) => {
+            dispatch('fetchAllRentalRequestsConfirmed', null)
+            commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', response.data.message);
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
+    },
+    returned({ commit, dispatch }, payload){
+        commit('SET_LOADING', true)
+        api.patch(`/admin/rental/returned/${payload}`)
+        .then((response) => {
+            dispatch('fetchAllRentalRequestsConfirmed', null)
+            commit('SET_LOADING', false)
+            this._vm.$eventHub.$emit('success-notification', response.data.message);
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
+    },
+
 }
 
 // Mutations
