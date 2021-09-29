@@ -6,6 +6,7 @@ import permission from './modules/permission'
 import role from './modules/role'
 import user from './modules/user'
 import book from './modules/book'
+import ebook from './modules/ebook'
 import writer from './modules/writer'
 import genre from './modules/genre'
 import rental from './modules/rental'
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     role,
     user,
     book,
+    ebook,
     writer,
     genre,
     rental
