@@ -67,6 +67,17 @@
                     <v-col
                       cols="12"
                     >
+
+                      <v-row>
+                        <v-col cols="6" class="d-flex justify-center align-center">
+                          <input type="file" v-on:change="onChange"> <br><br>
+                        </v-col>
+                        <v-col cols="6" class="d-flex justify-center align-center">
+                          <img v-bind:src="imagePreview" width="100" height="100" v-if="showPreview"/> 
+                          <img v-bind:src="serverURL + editedItem.image.path" width="100" height="100" v-else/> 
+                        </v-col>
+                      </v-row>
+
                       <v-text-field
                         v-model="editedItem.name"
                         label="Naziv"
@@ -221,8 +232,10 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 import moment from 'moment'
+import server from '../api/server'
   export default {
     data: () => ({
+      serverURL: server,
       dialog: false,
       dialogDelete: false,
       breadcrumbs: [
@@ -253,16 +266,21 @@ import moment from 'moment'
         price: '',
         description: '',
         genres: [],
-        writers: []
+        writers: [],
+        image: {}
       },
       defaultItem: {
         name: '',
         price: '',
         description: '',
         genres: [],
-        writers: []
+        writers: [],
+        image: {}
       },
 
+      file: '',
+      imagePreview: null,
+      showPreview: false
     }),
 
     computed: {
@@ -330,6 +348,9 @@ import moment from 'moment'
 
       closeDelete () {
         this.dialogDelete = false
+        this.file = '',
+        this.imagePreview = null,
+        this.showPreview = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
@@ -340,12 +361,49 @@ import moment from 'moment'
         this.dialog = true
       },
       save () {
+        let data = new FormData();
+        data.append('file', this.file);
+        data.append('name', this.editedItem.name);
+        data.append('price', this.editedItem.price);
+        data.append('description', this.editedItem.description);
+
+        this.editedItem.writers.forEach(item => {
+            data.append(`writers[]`, JSON.stringify(item));
+          });
+
+        this.editedItem.genres.forEach(item => {
+          data.append(`genres[]`, JSON.stringify(item));
+        });
+
         if (this.editedIndex > -1) {
-          this.updateBook(this.editedItem)
+          data.append('id', this.editedItem.id)
+          this.updateBook(data)
         } else {
-          this.createBook(this.editedItem)
+          this.createBook(data)
         }
         this.close()
+      },
+      onChange(e) {
+        this.file = e.target.files[0];
+        let reader  = new FileReader();
+        reader.addEventListener("load", function () {
+            this.showPreview = true;
+            this.imagePreview = reader.result;
+        }.bind(this), false);
+          if( this.file ){
+            /*
+                Ensure the file is an image file.
+            */
+            if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+                console.log("here");
+                /*
+                Fire the readAsDataURL method which will read the file in and
+                upon completion fire a 'load' event which we will listen to and
+                display the image in the preview.
+                */
+                reader.readAsDataURL( this.file );
+            }
+        }
       },
     },
   }

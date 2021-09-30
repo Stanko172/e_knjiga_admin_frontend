@@ -49,7 +49,7 @@ const actions = {
         })
     },
     updateBook({ commit, dispatch }, payload){
-        api.post(`admin/ebook/update/${payload.id}`, payload)
+        api.post(`admin/ebook/update/${payload.get('id')}`, payload)
         .then(() => {
             dispatch('fetchAllBooks', null)
             this._vm.$eventHub.$emit('success-notification', 'Knjiga uspješno spremljena');
