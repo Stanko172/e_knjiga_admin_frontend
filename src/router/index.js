@@ -78,6 +78,12 @@ const routes = [
     meta: { authOnly: true, gate: 'promotions_access' }
   },
   {
+    path: '/kuponi',
+    name: 'Coupons',
+    component: () => import('../views/Coupons.vue'),
+    meta: { authOnly: true, gate: 'coupons_access' }
+  },
+  {
     path: '/autori',
     name: 'Authors',
     component: () => import('../views/Authors.vue'),

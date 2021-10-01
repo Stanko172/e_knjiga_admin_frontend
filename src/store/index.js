@@ -10,6 +10,7 @@ import ebook from './modules/ebook'
 import writer from './modules/writer'
 import genre from './modules/genre'
 import rental from './modules/rental'
+import coupon from './modules/coupon'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     ebook,
     writer,
     genre,
-    rental
+    rental,
+    coupon
   }
 })

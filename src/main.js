@@ -9,6 +9,7 @@ import Snotify from 'vue-snotify';
 import 'vue-snotify/styles/material.css';
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import DatetimePicker from 'vuetify-datetime-picker'
 
 Vue.config.productionTip = false
 
@@ -23,6 +24,9 @@ Vue.use(Snotify)
 
 //Loading overlay UI
 Vue.use(VueLoading)
+
+//Date-time picker (vuetify)
+Vue.use(DatetimePicker)
 
 new Vue({
   router,
