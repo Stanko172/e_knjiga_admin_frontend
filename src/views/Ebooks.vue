@@ -78,6 +78,16 @@
                         </v-col>
                       </v-row>
 
+                      <v-row>
+                        <v-col cols="6" class="d-flex justify-center align-center">
+                          <input type="file" v-on:change="onChangeFile"> <br><br>
+                        </v-col>
+                        <v-col cols="6" class="d-flex justify-center align-center">
+                          <!--<img v-bind:src="imagePreviewPDF" width="100" height="100" v-if="showPreviewPDF"/>-->
+                          <pdf :src="serverURL + editedItem.pdf.path" v-if="!showPreviewPDF"></pdf>
+                        </v-col>
+                      </v-row>
+
                       <v-text-field
                         v-model="editedItem.name"
                         label="Naziv"
@@ -233,7 +243,11 @@
 import {mapState, mapActions} from 'vuex'
 import moment from 'moment'
 import server from '../api/server'
+import pdf from 'vue-pdf'
   export default {
+    components:{
+      pdf
+    },
     data: () => ({
       serverURL: server,
       dialog: false,
@@ -267,7 +281,8 @@ import server from '../api/server'
         description: '',
         genres: [],
         writers: [],
-        image: {}
+        image: {},
+        pdf: {}
       },
       defaultItem: {
         name: '',
@@ -275,12 +290,17 @@ import server from '../api/server'
         description: '',
         genres: [],
         writers: [],
-        image: {}
+        image: {},
+        pdf: {}
       },
 
       file: '',
       imagePreview: null,
-      showPreview: false
+      showPreview: false,
+
+      filePDF: '',
+      imagePreviewPDF: null,
+      showPreviewPDF: false
     }),
 
     computed: {
@@ -366,6 +386,7 @@ import server from '../api/server'
         data.append('name', this.editedItem.name);
         data.append('price', this.editedItem.price);
         data.append('description', this.editedItem.description);
+        data.append('pdf', this.filePDF);
 
         this.editedItem.writers.forEach(item => {
             data.append(`writers[]`, JSON.stringify(item));
@@ -391,17 +412,21 @@ import server from '../api/server'
             this.imagePreview = reader.result;
         }.bind(this), false);
           if( this.file ){
-            /*
-                Ensure the file is an image file.
-            */
             if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
-                console.log("here");
-                /*
-                Fire the readAsDataURL method which will read the file in and
-                upon completion fire a 'load' event which we will listen to and
-                display the image in the preview.
-                */
                 reader.readAsDataURL( this.file );
+            }
+        }
+      },
+      onChangeFile(e) {
+        this.filePDF = e.target.files[0];
+        let reader  = new FileReader();
+        reader.addEventListener("load", function () {
+            this.showPreviewPDF = true;
+            this.imagePreviewPDF = reader.result;
+        }.bind(this), false);
+          if( this.filePDF ){
+            if ( /\.(pdf)$/i.test( this.filePDF.name ) ) {
+                reader.readAsDataURL( this.filePDF );
             }
         }
       },
