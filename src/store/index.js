@@ -11,6 +11,7 @@ import writer from './modules/writer'
 import genre from './modules/genre'
 import rental from './modules/rental'
 import coupon from './modules/coupon'
+import promotion from './modules/promotion'
 
 Vue.use(Vuex)
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     writer,
     genre,
     rental,
-    coupon
+    coupon,
+    promotion
   }
 })
