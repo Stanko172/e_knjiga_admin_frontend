@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="3" v-for="i in 4" :key="i">
-        <DashCard />
+      <v-col cols="12" sm="3" v-for="(item, index) in data" :key="index">
+        <DashCard :item="item"/>
       </v-col>
     </v-row>
     <v-row>
@@ -35,7 +35,7 @@ export default {
     BarChart,
     DashTable
   },
-    data() {
+  data() {
     return {
       PieOptions: {
         hoverBorderWidth: 20
@@ -59,6 +59,9 @@ export default {
   },
   methods:{
     ...mapActions('dashboard', ['fetchAllData'])
+  },
+  created() {
+    this.fetchAllData()
   }
 }
 </script>

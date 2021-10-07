@@ -16,7 +16,7 @@ const getters = {
 const actions = {
     fetchAllData({ commit }){
         commit('SET_LOADING', true)
-        api.get("/admin/dashboard/index")
+        api.get("/admin/dashboard/dashboard_info")
         .then((response) => {
             commit('SET_DATA', response.data)
             commit('SET_LOADING', false)

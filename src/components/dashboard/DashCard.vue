@@ -1,21 +1,23 @@
 <template>
   <v-card
     class="mx-auto d-flex align-center justify-space-around pa-5"
-    color="#26c6da"
+    color="primary"
     dark
     max-width="280"
   >
 
-    <v-icon class="icon">mdi-account</v-icon>
+    <v-icon class="icon">{{ item.icon }}</v-icon>
 
-    <v-sheet class="number">12 000</v-sheet>
+    <v-sheet class="number">{{ item.count }}</v-sheet>
 
   </v-card>
 </template>
 
 <script>
 export default {
-
+    props:[
+        'item'
+    ]
 }
 </script>
 
