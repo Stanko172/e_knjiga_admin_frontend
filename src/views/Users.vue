@@ -76,6 +76,7 @@
                       <v-combobox
                         v-model="editedItem.roles"
                         :items="items"
+                        :item-text="item => item.title"
                         chips
                         clearable
                         label="Role"
@@ -93,9 +94,6 @@
                           >
                             <strong>{{ item.title }}</strong>&nbsp;
                           </v-chip>
-                        </template>
-                        <template v-slot:item="{ item }">
-                          <span>{{item.title}}</span>
                         </template>
                       </v-combobox>
                     </v-col>

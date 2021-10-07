@@ -66,6 +66,7 @@
                       <v-combobox
                         v-model="editedItem.permissions"
                         :items="items"
+                        :item-text="item => item.title"
                         chips
                         clearable
                         label="Permisije"
@@ -83,9 +84,6 @@
                           >
                             <strong>{{ item.title }}</strong>&nbsp;
                           </v-chip>
-                        </template>
-                        <template v-slot:item="{ item }">
-                          <span>{{item.title}}</span>
                         </template>
                       </v-combobox>
                     </v-col>
