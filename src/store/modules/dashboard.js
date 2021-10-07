@@ -5,6 +5,7 @@ const state = {
     data: [],
     barData: [],
     pieData: [],
+    tableData: [],
     errors: [],
     loading: false
 }
@@ -39,6 +40,17 @@ const actions = {
             this._vm.$eventHub.$emit('error-notification', error);
         })
     },
+    fetchTableData({ commit }, payload){
+        commit('SET_LOADING', true)
+        api.post("/admin/dashboard/table_data", payload)
+        .then((response) => {
+            commit('SET_TABLE_DATA', response.data)
+            commit('SET_LOADING', false)
+        })
+        .catch((error) => {
+            this._vm.$eventHub.$emit('error-notification', error);
+        })
+    }
 }
 
 // Mutations
@@ -46,6 +58,7 @@ const mutations = {
     SET_DATA: (state, data) => state.data = data,
     SET_BAR_CHART_DATA: (state, data) => state.barData = data,
     SET_PIE_CHART_DATA: (state, data) => state.pieData = data,
+    SET_TABLE_DATA: (state, data) => state.tableData = data,
     SET_ERRORS: (state, errors) => state.error = errors,
     SET_LOADING: (state, loading) => state.loading = loading
 }

@@ -14,14 +14,12 @@
                     cols="12"
                     sm="6"
                 >
-                    <v-select
-                    v-model="year"
-                    :items="states"
-                    :menu-props="{ maxHeight: '400' }"
-                    label="Select"
-                    hint="Upišite željenu godinu"
-                    persistent-hint
-                    ></v-select>
+                    <v-text-field 
+                    v-model="year" 
+                    type="number"
+                    >
+
+                    </v-text-field>
                 </v-col>
 
                 <v-col
@@ -30,7 +28,7 @@
                 >
                     <v-select
                     v-model="category"
-                    :items="states"
+                    :items="categories"
                     label="Select"
                     hint="Odaberite kategoriju"
                     persistent-hint
@@ -49,34 +47,51 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
     data(){
         return{
             headers: [
+                { text: '#', value: 'id' },
                 { text: 'Korisnik', value: 'name' },
-                { text: 'Grad', value: 'city' },
                 { text: 'Datum učlanjivanja', value: 'created_at' },
-                { text: 'Članarina vrijedi do', value: 'membership_duration' },
-                { text: 'Količina', value: 'amount' },
+                { text: 'Količina', value: 'total' },
             ],
-            states:[
-                'test 1',
-                'test 2',
-                'test 3'
+            categories:[
+                'iznajmljivanja',
+                'kupovine'
             ],
-            tableData: [
-                {
-                    name: 'John Doe',
-                    city: 'Mostar',
-                    created_at: '1.1.2021',
-                    membership_duration: '1.1.2022',
-                    amount: 44
-                }
-            ],
-            category: '',
-            year: ''
+            category: 'iznajmljivanja',
+            year: new Date().getFullYear()
         }
-    }
+    },
+    computed:{
+        ...mapState('dashboard', ['tableData'])
+    },
+    watch:{
+        category:{
+            handler(){
+                this.handleFetchTableData()
+            },
+            immediate: true
+        },
+        year:{
+            handler(){
+                this.handleFetchTableData()
+            },
+            immediate: true
+        }
+    },
+    methods:{
+        ...mapActions('dashboard', ['fetchTableData']),
+        handleFetchTableData(){
+            const payload = {
+                category: this.category,
+                year: this.year
+            }
+            this.fetchTableData(payload)
+        }
+    },
 }
 </script>
 

@@ -15,7 +15,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <DashTable />
+        <DashTable :tableData="tableData"/>
       </v-col>
     </v-row>
   </v-container>
@@ -39,10 +39,10 @@ export default {
     return {};
   },
   computed:{
-    ...mapState('dashboard', ['data', 'barData', 'pieData'])
+    ...mapState('dashboard', ['data', 'barData', 'pieData', 'tableData'])
   },
   methods:{
-    ...mapActions('dashboard', ['fetchAllData', 'fetchChartData'])
+    ...mapActions('dashboard', ['fetchAllData', 'fetchChartData', 'fetchTableData']),
   },
   created() {
     this.fetchAllData()
