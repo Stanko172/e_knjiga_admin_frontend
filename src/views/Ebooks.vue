@@ -94,6 +94,12 @@
                       ></v-text-field>
 
                       <v-text-field
+                        v-model="editedItem.year"
+                        type="number"
+                        label="Godina"
+                      ></v-text-field>
+
+                      <v-text-field
                         v-model="editedItem.price"
                         type="number"
                         label="Cijena"
@@ -136,7 +142,7 @@
                         :item-text="item => item.name"
                         chips
                         clearable
-                        label="Pisci"
+                        label="Žanrovi"
                         multiple
                         prepend-icon="mdi-filter-variant"
                         solo
@@ -277,6 +283,7 @@ import pdf from 'vue-pdf'
       editedIndex: -1,
       editedItem: {
         name: '',
+        year: '',
         price: '',
         description: '',
         genres: [],
@@ -286,6 +293,7 @@ import pdf from 'vue-pdf'
       },
       defaultItem: {
         name: '',
+        year: '',
         price: '',
         description: '',
         genres: [],
@@ -384,6 +392,7 @@ import pdf from 'vue-pdf'
         let data = new FormData();
         data.append('file', this.file);
         data.append('name', this.editedItem.name);
+        data.append('year', this.editedItem.year);
         data.append('price', this.editedItem.price);
         data.append('description', this.editedItem.description);
         data.append('pdf', this.filePDF);

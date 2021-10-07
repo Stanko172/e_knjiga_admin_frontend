@@ -82,6 +82,12 @@
                         label="Naziv"
                       ></v-text-field>
 
+                       <v-text-field
+                        v-model="editedItem.year"
+                        type="number"
+                        label="Godina"
+                      ></v-text-field>
+
                       <v-text-field
                         v-model="editedItem.amount"
                         type="number"
@@ -131,7 +137,7 @@
                         :item-text="item => item.name"
                         chips
                         clearable
-                        label="Pisci"
+                        label="Žanrovi"
                         multiple
                         prepend-icon="mdi-filter-variant"
                         solo
@@ -268,6 +274,7 @@ import server from '../api/server'
       editedIndex: -1,
       editedItem: {
         name: '',
+        year: '',
         amount: '',
         price: '',
         description: '',
@@ -277,6 +284,7 @@ import server from '../api/server'
       },
       defaultItem: {
         name: '',
+        year: '',
         amount: '',
         price: '',
         description: '',
@@ -373,6 +381,7 @@ import server from '../api/server'
           data.append('file', this.file);
           data.append('name', this.editedItem.name);
           data.append('price', this.editedItem.price);
+          data.append('year', this.editedItem.year);
           data.append('amount', this.editedItem.amount);
           data.append('description', this.editedItem.description);
 
