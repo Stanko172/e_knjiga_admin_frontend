@@ -7,10 +7,10 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="6">
-        <bar-chart></bar-chart>
+        <bar-chart :barData="barData" v-if="barData.length > 0"></bar-chart>
       </v-col>
       <v-col cols="12" sm="6">
-        <pie-chart :data="PieData" :options="PieOptions"></pie-chart>
+        <pie-chart :pieData="pieData" v-if="pieData.length > 0"></pie-chart>
       </v-col>
     </v-row>
     <v-row>
@@ -36,32 +36,17 @@ export default {
     DashTable
   },
   data() {
-    return {
-      PieOptions: {
-        hoverBorderWidth: 20
-      },
-      PieData: {
-        hoverBackgroundColor: "red",
-        hoverBorderWidth: 10,
-        labels: ["Green", "Red", "Blue"],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-            data: [1, 10, 5]
-          }
-        ]
-      }
-    };
+    return {};
   },
   computed:{
-    ...mapState('dashboard', ['data'])
+    ...mapState('dashboard', ['data', 'barData', 'pieData'])
   },
   methods:{
-    ...mapActions('dashboard', ['fetchAllData'])
+    ...mapActions('dashboard', ['fetchAllData', 'fetchChartData'])
   },
   created() {
     this.fetchAllData()
+    this.fetchChartData()
   }
 }
 </script>
