@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="main-bg">
     <EventHub />
 
     <Layout v-if="isLoggedIn"/>
@@ -36,3 +36,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .main-bg{
+    background-color: #FAFAFA !important;
+  }
+</style>

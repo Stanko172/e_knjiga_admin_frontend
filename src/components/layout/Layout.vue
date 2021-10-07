@@ -85,7 +85,7 @@
             </v-btn>
         </v-app-bar>
 
-        <v-main class="base-style">
+        <v-main>
             <router-view v-if="$route.meta.gate == undefined || $can($route.meta.gate)"></router-view>
         </v-main>
     </div>
@@ -137,11 +137,6 @@ export default {
         letter-spacing: 1.2px;
         color: white;
         text-align: center;
-    }
-
-    .base-style{
-        height: 100vh;
-        background-color: #FAFAFA;
     }
 
     .border-radius-default{
