@@ -12,6 +12,7 @@ import genre from './modules/genre'
 import rental from './modules/rental'
 import coupon from './modules/coupon'
 import promotion from './modules/promotion'
+import dashboard from './modules/dashboard'
 
 Vue.use(Vuex)
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     genre,
     rental,
     coupon,
-    promotion
+    promotion,
+    dashboard
   }
 })
